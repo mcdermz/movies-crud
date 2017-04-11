@@ -13,6 +13,7 @@
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
 </script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
   $('form').submit(function(event) {
     event.preventDefault();
@@ -25,6 +26,14 @@
       my_rating: $('#my_rating').val()
     };
 
-    $.post('/movies', data)
+    axios.post('/movies', data)
+    .then(response => {
+      const redirect = response.data.redirect;
+      if (redirect) {
+        document.location.href = redirect;
+      }
+    }).catch(err => {
+      console.log(err);
+    })
   });
 </script>

@@ -19,7 +19,7 @@ router.get('/new', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   db('movies')
-  .where('id', id)
+  .where({ id }).first()
   .then(moviesIndex => {
     res.render('movies', {title: 'Here\'s the movie you wanted!', moviesIndex});
   }).catch(err => {
@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
   .insert({title: title, director: director, poster_url: poster_url, year: year, my_rating: my_rating})
   .then(() => {
     console.log('SUCCESS');
-    res.redirect('/movies')
+    res.send({ redirect: '/movies' })
   }).catch(err => {
     console.log(err);
   });
