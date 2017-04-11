@@ -12,7 +12,9 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.get('')
+router.get('/new', (req, res, next) => {
+  res.render('new')
+});
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
@@ -23,6 +25,18 @@ router.get('/:id', (req, res, next) => {
   }).catch(err => {
     console.error(err);
   });
-})
+});
+
+router.post('/', (req, res, next) => {
+  const {title, director, poster_url, year, my_rating} = req.body;
+  db('movies')
+  .insert({title: title, director: director, poster_url: poster_url, year: year, my_rating: my_rating})
+  .then(() => {
+    console.log('SUCCESS');
+    res.redirect('/movies')
+  }).catch(err => {
+    console.log(err);
+  });
+});
 
 module.exports = router;
