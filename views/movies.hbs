@@ -6,15 +6,20 @@
       <a href="/movies/new">Add a movie!</a>
       <div>
         {{#each moviesIndex}}
-          <ul class="">
-            {{#with this}}
-            <li class=""><a href="/movies/{{id}}">{{title}}</a></li>
-            <img src={{poster_url}} alt="">
-            <li class=""><span>DIRECTED BY: </span>{{director}}</li>
-            <li class=""><span>YEAR: </span>{{year}}</li>
-            <li class=""><span>RATING: </span>{{my_rating}}</li>
-            {{/with}}
-          </ul>
+        <ul class="">
+          {{#with this}}
+          <li class="">
+            <a href="/movies/{{id}}">{{title}}</a>
+            <form class="" action="/movies/{{id}}/edit">
+              <input type="submit" value="Edit" />
+            </form>
+          </li>
+          <img src={{poster_url}} alt="">
+          <li class=""><span>DIRECTED BY: </span>{{director}}</li>
+          <li class=""><span>YEAR: </span>{{year}}</li>
+          <li class=""><span>RATING: </span>{{my_rating}}</li>
+          {{/with}}
+        </ul>
         {{/each}}
       </div>
       <a href="/">GO HOME UR DRUKN</a>

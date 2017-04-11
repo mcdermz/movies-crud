@@ -7,7 +7,7 @@ router.get('/', indexMovies);
 router.post('/', postMovie);
 router.get('/new', addMovie);
 router.get('/:id', showMovie);
-// router.put('/movies/:id', updateMovie);
+router.get('/:id/edit', editMovie);
 
 
 
@@ -46,6 +46,13 @@ function showMovie(req, res, next) {
   });
 }
 
-
+function editMovie(req, res, next) {
+  db('movies').select('*').where('id', req.params.id)
+  .then(movie => {
+    console.log(movie);
+    const {title, director, poster_url, my_rating, year} = movie[0];
+    res.render('edit', {title, director, poster_url, my_rating, year});
+  })
+}
 
 module.exports = router;
