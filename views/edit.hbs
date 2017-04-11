@@ -9,7 +9,7 @@
   <input id="year" type="number" name="year" value="{{year}}" placeholder="Year">
   <label for="my_rating">Rating</label>
   <input id="my_rating" type="number" name="my_rating" value="{{my_rating}}" placeholder="Rating">
-  <button type="submit" name="button">Submit</button>
+  <button type="submit" name="button" data-id="{{id}}">Submit</button>
 </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
 </script>
@@ -17,7 +17,7 @@
 <script type="text/javascript">
   $('form').submit(function(event) {
     event.preventDefault();
-
+    const id = $('button').data('id')
     var data = {
       title: $('#title').val(),
       director: $('#director').val(),
@@ -26,7 +26,7 @@
       my_rating: $('#my_rating').val()
     };
 
-    axios.post('/movies', data)
+    axios.put('/movies/' + id, data)
     .then(response => {
       const redirect = response.data.redirect;
       if (redirect) {

@@ -8,6 +8,7 @@ router.post('/', postMovie);
 router.get('/new', addMovie);
 router.get('/:id', showMovie);
 router.get('/:id/edit', editMovie);
+router.put('/:id', updateMovie);
 
 
 
@@ -50,9 +51,22 @@ function editMovie(req, res, next) {
   db('movies').select('*').where('id', req.params.id)
   .then(movie => {
     console.log(movie);
-    const {title, director, poster_url, my_rating, year} = movie[0];
-    res.render('edit', {title, director, poster_url, my_rating, year});
+    const {title, director, poster_url, my_rating, year, id} = movie[0];
+    res.render('edit', {title, director, poster_url, my_rating, year, id});
   })
+}
+
+function updateMovie(req, res, next) {
+  const {title, director, poster_url, year, my_rating} = req.body;
+  db('movies').where('id', req.params.id)
+  .update({title, director, poster_url, year, my_rating}, 'id')
+  .then(resId => {
+    let id = resId[0];
+    console.log('SUCCESS');
+    res.send({ redirect: '/movies/' + id})
+  }).catch(err => {
+    console.log(err);
+  });
 }
 
 module.exports = router;
