@@ -1,3 +1,22 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-<a href="/">GO HOME UR DRUKN</a>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-12">
+      <h1>{{title}}</h1>
+      <p>Welcome to {{title}}</p>
+      <div>
+        {{#each moviesIndex}}
+          <ul class="">
+            {{#with this}}
+            <li class=""><span>TITLE: </span>{{title}}</li>
+            <img src={{poster_url}} alt="">
+            <li class=""><span>DIRECTED BY: </span>{{director}}</li>
+            <li class=""><span>YEAR: </span>{{year}}</li>
+            <li class=""><span>RATING: </span>{{my_rating}}</li>
+            {{/with}}
+          </ul>
+        {{/each}}
+      </div>
+      <a href="/">GO HOME UR DRUKN</a>
+    </div>
+  </div>
+</div>
