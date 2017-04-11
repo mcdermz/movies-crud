@@ -12,6 +12,19 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.post('/', (req, res, next) => {
+  const {title, director, poster_url, year, my_rating} = req.body;
+  db('movies')
+  .insert({title, director, poster_url, year, my_rating}, 'id')
+  .then(resId => {
+    let id = resId[0];
+    console.log('SUCCESS');
+    res.send({ redirect: '/movies/' + id})
+  }).catch(err => {
+    console.log(err);
+  });
+});
+
 router.get('/new', (req, res, next) => {
   res.render('new')
 });
@@ -19,7 +32,7 @@ router.get('/new', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   db('movies')
-  .where({ id }).first()
+  .where({ id })
   .then(moviesIndex => {
     res.render('movies', {title: 'Here\'s the movie you wanted!', moviesIndex});
   }).catch(err => {
@@ -27,16 +40,6 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
-router.post('/', (req, res, next) => {
-  const {title, director, poster_url, year, my_rating} = req.body;
-  db('movies')
-  .insert({title: title, director: director, poster_url: poster_url, year: year, my_rating: my_rating})
-  .then(() => {
-    console.log('SUCCESS');
-    res.send({ redirect: '/movies' })
-  }).catch(err => {
-    console.log(err);
-  });
-});
+
 
 module.exports = router;
