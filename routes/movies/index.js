@@ -9,6 +9,7 @@ router.get('/new', addMovie);
 router.get('/:id', showMovie);
 router.get('/:id/edit', editMovie);
 router.put('/:id', updateMovie);
+router.get('/:id/delete', deleteMovie);
 
 
 
@@ -30,7 +31,7 @@ function postMovie(req, res, next) {
     console.log('SUCCESS');
     res.send({ redirect: '/movies/' + id})
   }).catch(err => {
-    console.log(err);
+    console.error(err);
   });
 }
 
@@ -65,8 +66,17 @@ function updateMovie(req, res, next) {
     console.log('SUCCESS');
     res.send({ redirect: '/movies/' + id})
   }).catch(err => {
-    console.log(err);
+    console.error(err);
   });
+}
+
+function deleteMovie(req, res, next) {
+  db('movies').del().where('id', req.params.id)
+  .then( () => {
+    res.redirect('/movies')
+  }).catch(err => {
+    console.error(err);
+  })
 }
 
 module.exports = router;

@@ -13,6 +13,9 @@
             <form class="" action="/movies/{{id}}/edit">
               <input type="submit" value="Edit" />
             </form>
+            <form class="" action="/movies/{{id}}/delete" method="GET">
+              <input type="submit" name="delete" value="Delete" />
+            </form>
           </li>
           <img src={{poster_url}} alt="">
           <li class=""><span>DIRECTED BY: </span>{{director}}</li>
