@@ -9,7 +9,7 @@ router.get('/new', addMovie);
 router.get('/:id', showMovie);
 router.get('/:id/edit', editMovie);
 router.put('/:id', updateMovie);
-router.get('/:id/delete', deleteMovie);
+router.post('/:id/delete', deleteMovie);
 
 
 
