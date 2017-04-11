@@ -7,13 +7,12 @@ router.get('/', (req, res, next) => {
   db('movies')
   .then(moviesIndex => {
     res.render('movies', {title: 'Movies Index Page!', moviesIndex});
-    knex.destroy();
   }).catch(err => {
     console.error(err);
-    knex.destroy();
-    process.exit(1);
   });
 });
+
+router.get('')
 
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
@@ -21,11 +20,8 @@ router.get('/:id', (req, res, next) => {
   .where('id', id)
   .then(moviesIndex => {
     res.render('movies', {title: 'Here\'s the movie you wanted!', moviesIndex});
-    knex.destroy();
   }).catch(err => {
     console.error(err);
-    knex.destroy();
-    process.exit(1);
   });
 })
 

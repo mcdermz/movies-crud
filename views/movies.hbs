@@ -7,7 +7,7 @@
         {{#each moviesIndex}}
           <ul class="">
             {{#with this}}
-            <li class=""><span>TITLE: </span>{{title}}</li>
+            <li class=""><a href="/movies/{{id}}">{{title}}</a></li>
             <img src={{poster_url}} alt="">
             <li class=""><span>DIRECTED BY: </span>{{director}}</li>
             <li class=""><span>YEAR: </span>{{year}}</li>
