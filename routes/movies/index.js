@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../db/knex.js');
 
-/* GET movies listing. */
+
 router.get('/', indexMovies);
 router.post('/', postMovie);
-router.get('/new', (req, res, next) => {
-  res.render('new')
-});
+router.get('/new', addMovie);
 router.get('/:id', showMovie);
+// router.put('/movies/:id', updateMovie);
+
 
 
 function indexMovies(req, res, next) {
@@ -32,6 +32,8 @@ function postMovie(req, res, next) {
     console.log(err);
   });
 }
+
+function addMovie(req, res, next) { res.render('new') }
 
 function showMovie(req, res, next) {
   const id = req.params.id;
