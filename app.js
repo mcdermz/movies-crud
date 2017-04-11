@@ -5,7 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var movies = require('./routes/movies');
+var movies = require('./routes/movies/index');
 
 var app = express();
 
